@@ -1,0 +1,14 @@
+{
+  "name": "vulnerable-sqli-demo",
+  "version": "1.0.0",
+  "description": "Intentionally SQL-injection-vulnerable local demo app for firewall/WAF coursework.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "sqlite3": "^5.1.7"
+  }
+}

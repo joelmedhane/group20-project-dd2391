@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SQLi Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: 30px auto; padding: 0 16px; }
+    section { border: 1px solid #ccc; padding: 16px; margin: 16px 0; }
+    input, button { padding: 7px; margin: 4px 0; }
+    input { width: 240px; }
+    .hidden { display: none; }
+    li { margin: 6px 0; }
+    #status { white-space: pre-wrap; background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>SQL Injection Demo App</h1>
+  <p><strong>Warning:</strong> intentionally vulnerable. Run locally only.</p>
+
+  <section id="auth">
+    <h2>Create account</h2>
+    <form id="registerForm">
+      <input id="registerUsername" placeholder="Username" required />
+      <br />
+      <input id="registerPassword" type="password" placeholder="Password" required />
+      <br />
+      <button>Create account</button>
+    </form>
+
+    <h2>Log in</h2>
+    <form id="loginForm">
+      <input id="loginUsername" placeholder="Username" required />
+      <br />
+      <input id="loginPassword" type="password" placeholder="Password" required />
+      <br />
+      <button>Log in</button>
+    </form>
+  </section>
+
+  <section id="app" class="hidden">
+    <p>Logged in as <strong id="currentUser"></strong></p>
+    <button id="logoutButton">Log out</button>
+
+    <h2>Search users</h2>
+    <form id="searchForm">
+      <input id="searchInput" placeholder="Search username" />
+      <button>Search</button>
+    </form>
+    <ul id="searchResults"></ul>
+
+    <h2>My friends</h2>
+    <button id="refreshFriends">Refresh friends</button>
+    <ul id="friends"></ul>
+  </section>
+
+  <h2>Status</h2>
+  <div id="status">Ready.</div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
