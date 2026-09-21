@@ -139,6 +139,6 @@ app.get('/api/friends', requireLogin, (req, res) => {
 
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Vulnerable SQLi demo running at http://127.0.0.1:${PORT}`);
+  console.log(`Vulnerable SQLi demo running at http://0.0.0.0:${PORT}`);
   console.log('For local coursework/lab use only. Do not expose this app to the Internet.');
 });

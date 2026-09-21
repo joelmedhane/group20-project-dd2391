@@ -107,3 +107,50 @@ charlie123
 ```
 
 This demonstrates how SQL injection can expose sensitive database information when user input is inserted directly into SQL queries.
+
+
+# Docker setup
+
+The vulnerable Express.js/SQLite application has been containerized with Docker.
+
+The application is intentionally vulnerable to SQL injection for educational testing. The Node.js target currently runs on port 3000.
+
+Run the application with the following commands:
+
+Build the Docker image:
+
+```
+docker compose build
+```
+
+Start the application:
+
+```
+docker compose up
+```
+
+Or build and start in one command:
+
+```
+docker compose up --build
+```
+
+Then open:
+
+http://localhost:3000
+
+Stop the application with:
+
+```
+docker compose down
+```
+
+Current Docker structure
+
+The node_target service runs the vulnerable Express application inside Docker.
+
+During the baseline demonstration, port 3000 is exposed to the host so the SQL injection vulnerability can be tested directly.
+
+In the final setup, the Node target will only be accessible internally through Docker, while the FastAPI proxy/WAF will be exposed on port 80.
+
+The WAF is an additional defense layer and is not a replacement for secure SQL queries such as parameterized queries.
