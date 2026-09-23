@@ -13,4 +13,25 @@ async def reverse_proxy(request: Request, path: str):
     if is_malicious(raw_body, request):
         return Response(status_code=403)
         
+    safe_headers = {}
+    for key, value in request.headers.items():
+        if key.lower() not in ('host', 'connection'):
+            safe_headers[key] = value
+            
+    query_string = request.url.query.encode("utf-8")
+    url = httpx.URL(path=request.url.path, query=query_string)
+
+    rp_req = client.build_request(
+        method=request.method,
+        url=url,
+        headers=safe_headers,
+        content=raw_body
+    )
     
+    rp_resp = await client.send(rp_req, stream=True)
+    
+    return StreamingResponse(
+        rp_resp.aiter_raw(),
+        status_code=rp_resp.status_code,
+        headers=rp_resp.headers
+    )
