@@ -1,0 +1,30 @@
+{
+  "block_threshold": 4,
+  "rules": [
+    {
+      "name": "UNION_SELECT",
+      "value": "union select",
+      "score": 5
+    },
+    {
+      "name": "SELECT",
+      "value": "select",
+      "score": 2
+    },
+    {
+      "name": "DROP",
+      "value": "drop",
+      "score": 2
+    },
+    {
+      "name": "SQL_COMMENT",
+      "value": "--",
+      "score": 3
+    },
+    {
+      "name": "OR_EXPRESSION",
+      "value": " or ",
+      "score": 2
+    }
+  ]
+}
