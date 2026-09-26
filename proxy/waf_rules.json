@@ -1,5 +1,5 @@
 {
-  "block_threshold": 4,
+  "blocking_threshold": 4,
   "rules": [
     {
       "name": "UNION_SELECT",

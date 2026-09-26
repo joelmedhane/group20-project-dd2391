@@ -1,0 +1,50 @@
+[
+  {
+    "name": "ordinary username search",
+    "malicious": false,
+    "body": "",
+    "query": "q=alice"
+  },
+  {
+    "name": "benign select wording",
+    "malicious": false,
+    "body": "",
+    "query": "q=select+a+category"
+  },
+  {
+    "name": "benign drop wording",
+    "malicious": false,
+    "body": "",
+    "query": "q=drop-off+point"
+  },
+  {
+    "name": "benign or wording",
+    "malicious": false,
+    "body": "",
+    "query": "q=status+or+username"
+  },
+  {
+    "name": "encoded boolean login injection",
+    "malicious": true,
+    "body": "",
+    "query": "username=%27+OR+%271%27%3D%271%27+--"
+  },
+  {
+    "name": "union select injection",
+    "malicious": true,
+    "body": "",
+    "query": "q=%27+UNION+SELECT+id%2C+password+FROM+users+--"
+  },
+  {
+    "name": "unicode compatibility normalization",
+    "malicious": true,
+    "body": "",
+    "query": "q=%EF%BD%95%EF%BD%8E%EF%BD%89%EF%BD%8F%EF%BD%8E%E3%80%80%EF%BD%93%EF%BD%85%EF%BD%8C%EF%BD%85%EF%BD%83%EF%BD%94"
+  },
+  {
+    "name": "injection in form body",
+    "malicious": true,
+    "body": "username=%27+OR+%271%27%3D%271%27+--",
+    "query": ""
+  }
+]

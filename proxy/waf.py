@@ -1,8 +1,13 @@
-from fastapi import Request
+from __future__ import annotations
+
 import urllib.parse
 import unicodedata
 from pathlib import Path
 import json
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from fastapi import Request
 
 RULES_FILE = Path(__file__).with_name("waf_rules.json")
 
