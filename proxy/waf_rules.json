@@ -1,5 +1,5 @@
 {
-  "blocking_threshold": 4,
+  "block_threshold": 4,
   "rules": [
     {
       "name": "UNION_SELECT",
@@ -17,14 +17,79 @@
       "score": 2
     },
     {
+      "name": "INSERT",
+      "value": "insert",
+      "score": 2
+    },
+    {
+      "name": "UPDATE",
+      "value": "update",
+      "score": 2
+    },
+    {
+      "name": "DELETE",
+      "value": "delete",
+      "score": 2
+    },
+    {
       "name": "SQL_COMMENT",
       "value": "--",
       "score": 3
     },
     {
+      "name": "SQL_BLOCK_COMMENT",
+      "value": "/*",
+      "score": 3
+    },
+    {
       "name": "OR_EXPRESSION",
-      "value": " or ",
+      "value": "or",
       "score": 2
+    },
+    {
+      "name": "AND_EXPRESSION",
+      "value": "and",
+      "score": 2
+    },
+    {
+      "name": "SLEEP",
+      "value": "sleep",
+      "score": 2
+    },
+    {
+      "name": "BENCHMARK",
+      "value": "benchmark",
+      "score": 2
+    },
+    {
+      "name": "INFORMATION_SCHEMA",
+      "value": "information_schema",
+      "score": 3
+    },
+    {
+      "name": "SELECT_FROM",
+      "value": "select from",
+      "score": 4
+    },
+    {
+      "name": "UPDATE_SET",
+      "value": "update set",
+      "score": 4
+    },
+    {
+      "name": "DROP_TABLE",
+      "value": "drop table",
+      "score": 4
+    },
+    {
+      "name": "DELETE_FROM",
+      "value": "delete from",
+      "score": 4
+    },
+    {
+      "name": "INSERT_INTO",
+      "value": "insert into",
+      "score": 4
     }
   ]
 }
