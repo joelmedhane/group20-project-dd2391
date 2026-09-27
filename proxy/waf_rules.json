@@ -1,95 +1,77 @@
 {
-  "block_threshold": 4,
-  "rules": [
-    {
-      "name": "UNION_SELECT",
-      "value": "union select",
-      "score": 5
-    },
-    {
-      "name": "SELECT",
-      "value": "select",
-      "score": 2
-    },
-    {
-      "name": "DROP",
-      "value": "drop",
-      "score": 2
-    },
-    {
-      "name": "INSERT",
-      "value": "insert",
-      "score": 2
-    },
-    {
-      "name": "UPDATE",
-      "value": "update",
-      "score": 2
-    },
-    {
-      "name": "DELETE",
-      "value": "delete",
-      "score": 2
-    },
-    {
-      "name": "SQL_COMMENT",
-      "value": "--",
-      "score": 3
-    },
-    {
-      "name": "SQL_BLOCK_COMMENT",
-      "value": "/*",
-      "score": 3
-    },
-    {
-      "name": "OR_EXPRESSION",
-      "value": "or",
-      "score": 2
-    },
-    {
-      "name": "AND_EXPRESSION",
-      "value": "and",
-      "score": 2
-    },
-    {
-      "name": "SLEEP",
-      "value": "sleep",
-      "score": 2
-    },
-    {
-      "name": "BENCHMARK",
-      "value": "benchmark",
-      "score": 2
-    },
-    {
-      "name": "INFORMATION_SCHEMA",
-      "value": "information_schema",
-      "score": 3
-    },
-    {
-      "name": "SELECT_FROM",
-      "value": "select from",
-      "score": 4
-    },
-    {
-      "name": "UPDATE_SET",
-      "value": "update set",
-      "score": 4
-    },
-    {
-      "name": "DROP_TABLE",
-      "value": "drop table",
-      "score": 4
-    },
-    {
-      "name": "DELETE_FROM",
-      "value": "delete from",
-      "score": 4
-    },
-    {
-      "name": "INSERT_INTO",
-      "value": "insert into",
-      "score": 4
-    }
-  ]
+    "blocking_threshold": 5,
+    "rules": [
+        {
+            "name": "SELECT",
+            "type": "word",
+            "value": "select",
+            "score": 1
+        },
+        {
+            "name": "DELETE",
+            "type": "word",
+            "value": "delete",
+            "score": 1
+        },
+        {
+            "name": "UPDATE",
+            "type": "word",
+            "value": "update",
+            "score": 1
+        },
+        {
+            "name": "SELECT_FROM",
+            "type": "keywords",
+            "value": ["select", "from"],
+            "score": 4
+        },
+        {
+            "name": "UPDATE_SET",
+            "type": "keywords",
+            "value": ["update", "set"],
+            "score": 4
+        },
+        {
+            "name": "INSERT_INTO",
+            "type": "keywords",
+            "value": ["insert", "into"],
+            "score": 5
+        },
+        {
+            "name": "DELETE_FROM",
+            "type": "keywords",
+            "value": ["delete", "from"],
+            "score": 4
+        },
+        {
+            "name": "UNION_SELECT",
+            "type": "keywords",
+            "value": ["union", "select"],
+            "score": 5
+        },
+        {
+            "name": "DROP_TABLE",
+            "type": "keywords",
+            "value": ["drop", "table"],
+            "score": 5
+        },
+        {
+            "name": "SQL_BOOLEAN",
+            "type": "regex",
+            "value": "\\b(or|and)\\b\\s+[\\w'\"]+\\s*=\\s*[\\w'\"]+",
+            "score": 5
+        },
+        {
+            "name": "SQL_LINE_COMMENT",
+            "type": "comment",
+            "value": "--",
+            "score": 3
+        },
+        {
+            "name": "SQL_BLOCK_COMMENT",
+            "type": "comment",
+            "value": "/*",
+            "score": 3
+        }
+    ]
 }

@@ -10,6 +10,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from fastapi import Request
 
+#-----------------------rules loading-----------------------
+
 RULES_FILE = Path(__file__).with_name("waf_rules.json")
 
 def load_rules():
@@ -20,6 +22,8 @@ config = load_rules()
 RULES = config["rules"]
 BLOCKING_REQUESTS_THRESHOLD = config.get("blocking_threshold", 4)
 
+#--------------------text normalization--------------------
+
 def normalize_request(text):
     #normalize the input before applying WAF rules
     # SELECT%20*%20FROM%20users -> select * from users
@@ -29,9 +33,9 @@ def normalize_request(text):
     
     #decode url encoding
     text =str(text)
-    text = urllib.parse.unquote_plus(text) #turns + into space also
+    text = urllib.parse.unquote_plus(text)
     text = unicodedata.normalize('NFKC', text)
-    # Select select SELECT 
+
     text = text.lower()
 
     #remove multiple spaces
@@ -40,64 +44,70 @@ def normalize_request(text):
 
     return text
 
+#-------------------matching logic-------------------
 
-def rule_matches(text, rule_value):
-    #check if a WAF rule matches the text
+def rule_matches(text, rule):
 
-    value = rule_value.lower().strip()
+    rule_type=rule["type"]
+    value=rule["value"]
 
-    # some SQL statements can have text between the keywords
-    #this accounts for SELECT username FROM users, where SELECT and FROM are not next to each other 
-    if value == "select from":
-        return re.search(r"\bselect\b.+\bfrom\b",text) is not None
-
-    # UPDATE users SET password='asdf'
-    if value == "update set":
-        return re.search(r"\bupdate\b.+\bset\b",text) is not None
-
-    #for multi-word rules ex. union select, drop table
-    if ' ' in value:
-        pattern = re.escape(value)
-        pattern = pattern.replace(r'\ ', r'\s+')
-
+    if rule_type=="word":
+        pattern= r"\b" +value + r"\b"
         return re.search(pattern,text) is not None
 
-    #single word rules
-    if value.replace("_","").isalnum():
-        #select shouldnt match selected,selection
-        pattern=r"\b" +re.escape(value) + r"\b"
-        return re.search(pattern, text) is not None
+    if rule_type=="keywords":
+        pattern=""
 
-    #symbols like --, /*
-    return value in text
+        for word in value:
+            if pattern:
+                pattern+= r".+?"
+            pattern+= r"\b" +word + r"\b"
+            
+        return re.search(pattern,text) is not None
 
+    if rule_type == "regex":
+        return re.search(value, text) is not None
 
+    return False
+
+#------------------- inspection logic-------------------
 def inspect_text(text):
     score = 0
     triggered_rules = []
 
+    original_text = text
+    cleaned_text = re.sub(r'/\*.*?\*/', ' ', text, flags=re.DOTALL) #sel/**/ect becomes sel ect
+    print(cleaned_text)
+
     for rule in RULES:
-        if rule_matches(text, rule["value"]):
+
+        if rule["type"]=="comment":
+            matched = rule["value"] in original_text
+
+        else:
+            matched=rule_matches(cleaned_text,rule)
+
+        if matched:
             score += rule['score']
             triggered_rules.append(rule['name'])
 
     return score, triggered_rules
 
+#-------------------logging-------------------
 def log_blocking_request(request,score,triggered_rules):
     #why the request was blocked
     print(f"Blocked request from {request.client.host}:{request.client.port}"
           f"- Score: {score}, Triggered Rules: {', '.join(triggered_rules)}")
 
-
-def is_malicious(raw_body: bytes, request: Request):
+#-------------------main function-------------------
+def is_malicious(raw_body, request):
 
     body = raw_body.decode('utf-8', errors="replace")
 
     normalized_body = normalize_request(body)
     normalized_query = normalize_request(request.url.query)
-    normalized_path = normalize_request(request.url.path)
 
-    text_to_inspect = normalized_body + " " + normalized_query + " " + normalized_path
+    text_to_inspect = normalized_body + " " + normalized_query 
 
     score, rules = inspect_text(text_to_inspect)
 
