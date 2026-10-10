@@ -18,5 +18,12 @@ services:
     networks:
       - backend
 
+  sqlmap:
+    build:
+      context: ./sql-map
+      dockerfile: Dockerfile
+    volumes:
+      - ./sql-map/sqlmap-results:/results
+
 networks:
   backend:
