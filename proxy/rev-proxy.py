@@ -29,6 +29,7 @@ async def reverse_proxy(request: Request, path: str):
     )
     
     rp_resp = await client.send(rp_req, stream=True)
+    client.cookies.clear() 
     
     return StreamingResponse(
         rp_resp.aiter_raw(),
