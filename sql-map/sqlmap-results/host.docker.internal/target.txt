@@ -1,3 +1,1 @@
-http://host.docker.internal:8080/api/login (POST)  # /usr/bin/sqlmap -u http://host.docker.internal:8080/api/login --data={\"username\":\"\",\"password\":\"\"} -H "Content-Type: application/json" -p username,password --ignore-code 401 --batch --level 3 --flush-session --output-dir=/results -t /results/waf.log
-
-{"username":"","password":""}
+http://host.docker.internal:8080/api/users/search?q=test (GET)  # /usr/bin/sqlmap -u http://host.docker.internal:8080/api/users/search?q=test --cookie=connect.sid=s%3A5S6yzF1vS83jzwOLTIZuvZ9MKbleMMOv.GtQZ%2BdYq67ICaP%2BUuwoMX%2BBpeIuMcXFKNP1DXsP5vB0 -p q --batch --level 3 --flush-session --output-dir=/results -t /results/waf-search.log

