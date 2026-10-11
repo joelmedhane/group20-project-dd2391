@@ -6,7 +6,7 @@ set -e
 OUT="sqlmap-results"
 URL="http://host.docker.internal:8080"
 LOGIN_URL="$URL/api/login"
-SEARCH_URL="$URL/api/users/search?q=test"
+SEARCH_URL="$URL/api/users/search?q="
 
 mkdir -p "$OUT"
 
