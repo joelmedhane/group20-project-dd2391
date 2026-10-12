@@ -195,7 +195,7 @@ cd sql-map
 Run the test script:
 
 ```bash
-./sqlmap-test.sh
+./run_sqlmap.sh
 ```
 
 The script starts the vulnerable application and WAF in the foreground, builds and runs the SQLmap container, and prints a summary of the HTTP status codes observed during testing.
