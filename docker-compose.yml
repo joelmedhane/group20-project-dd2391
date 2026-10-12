@@ -24,6 +24,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./sql-map/sqlmap-results:/results
+    networks:
+      - backend
 
 networks:
   backend:
