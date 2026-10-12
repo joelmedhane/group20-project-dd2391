@@ -4,7 +4,7 @@
 set -e
 
 OUT="sqlmap-results"
-URL="http://host.docker.internal:8080"
+URL="http://fastapi_proxy:8000"
 LOGIN_URL="$URL/api/login"
 SEARCH_URL="$URL/api/users/search?q="
 
