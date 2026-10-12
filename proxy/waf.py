@@ -10,8 +10,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from fastapi import Request
 
-#-----------------------rules loading-----------------------
-
+#Load rules from Json file
 RULES_FILE = Path(__file__).with_name("waf_rules.json")
 
 def load_rules():
@@ -22,30 +21,37 @@ config = load_rules()
 RULES = config["rules"]
 BLOCKING_REQUESTS_THRESHOLD = config.get("blocking_threshold", 4)
 
-#--------------------text normalization--------------------
+#Main function to check if the request is malicious or not based on score and triggered rules
+def is_malicious(raw_body, request):
+    body = raw_body.decode('utf-8', errors="replace")
+    normalized_body = normalize_request(body)
+    normalized_query = normalize_request(request.url.query)
 
+    text_to_inspect = normalized_body + " " + normalized_query 
+
+    score, rules = inspect_text(text_to_inspect)
+
+    if score >= BLOCKING_REQUESTS_THRESHOLD:
+        log_blocking_request(request, score, rules)
+        return True
+
+    return False
+
+#Input normalization: decoding, lowercasing, removing extra spaces
 def normalize_request(text):
-    #normalize the input before applying WAF rules
-    # SELECT%20*%20FROM%20users -> select * from users
-
     if text is None:
         return ""
     
-    #decode url encoding
-    text =str(text)
+    text = str(text)
     text = urllib.parse.unquote_plus(text)
     text = unicodedata.normalize('NFKC', text)
-
     text = text.lower()
-
-    #remove multiple spaces
-    text=re.sub(r'\s+',' ', text)
+    text = re.sub(r'\s+',' ', text)
     text = text.strip()
 
     return text
 
-#-------------------matching logic-------------------
-
+#Check if the input matches a word, keyword sequence or regular exprression rule
 def rule_matches(text, rule):
 
     rule_type=rule["type"]
@@ -70,7 +76,7 @@ def rule_matches(text, rule):
 
     return False
 
-#------------------- inspection logic-------------------
+#Inspect input against all WAF rules, anomaly score and triggered rules
 def inspect_text(text):
     score = 0
     triggered_rules = []
@@ -83,7 +89,6 @@ def inspect_text(text):
 
         if rule["type"]=="comment":
             matched = rule["value"] in original_text
-
         else:
             matched=rule_matches(cleaned_text,rule)
 
@@ -93,28 +98,8 @@ def inspect_text(text):
 
     return score, triggered_rules
 
-#-------------------logging-------------------
+#Log information about blocked requests
 def log_blocking_request(request,score,triggered_rules):
-    #why the request was blocked
+
     print(f"Blocked request from {request.client.host}:{request.client.port}"
           f"- Score: {score}, Triggered Rules: {', '.join(triggered_rules)}")
-
-#-------------------main function-------------------
-def is_malicious(raw_body, request):
-
-    body = raw_body.decode('utf-8', errors="replace")
-
-    normalized_body = normalize_request(body)
-    normalized_query = normalize_request(request.url.query)
-
-    text_to_inspect = normalized_body + " " + normalized_query 
-
-    score, rules = inspect_text(text_to_inspect)
-
-    if score >= BLOCKING_REQUESTS_THRESHOLD:
-        #show a message why it was blocked
-        log_blocking_request(request, score, rules)
-
-        return True
-
-    return False

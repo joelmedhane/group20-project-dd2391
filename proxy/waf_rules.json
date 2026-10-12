@@ -58,9 +58,9 @@
         {
             "name": "SQL_BOOLEAN",
             "type": "regex",
-            "value": "\\b(or|and)\\b\\s+[\\w'\"]+\\s*=\\s*[\\w'\"]+",
+            "value": "\\b(or|and)\\b\\s+[\\w'\"]+\\s*(=|>|<|>=|<=|!=|<>)\\s*[\\w'\"]+",
             "score": 5
-        },
+        },  
         {
             "name": "SQL_LINE_COMMENT",
             "type": "comment",
