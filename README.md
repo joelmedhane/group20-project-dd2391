@@ -222,3 +222,21 @@ The script prints counts for:
 - **200** — OK.
 
 
+## Individual Contributions:
+
+**Author:** Alberto Calcara 
+
+## Responsibility
+As part of our collaborative group project implementing a secure "defense-in-depth" architecture, my primary focus was designing, building, and deploying the gateway layer that protects our intentionally vulnerable Node.js/Express backend. Specifically, I was responsible for developing the asynchronous FastAPI reverse proxy (`rev-proxy.py`).
+
+### Asynchronous FastAPI Reverse Proxy 
+* **Catch-All Routing:** I implemented a FastAPI endpoint using a wildcard (`/{path:path}`) coupled with support for all standard HTTP methods (`GET`, `POST`, `PUT`, `DELETE`). This ensures that any incoming web traffic targeting the application is intercepted by the proxy layer.
+* **WAF Inspection Hook:** I integrated the security inspection by invoking the `is_malicious()` function prior to forwarding any payload. If a request is flagged as an attempted SQL injection, the proxy immediately halts execution and returns an HTTP `403 Forbidden` status code.
+* **Header Sanitization:** To prevent routing errors and protocol mismatches, I iterated through incoming request headers and explicitly stripped hop-by-hop headers such as `host` and `connection`. This ensures that internal backend communication remains correct.
+* **Payload & Query Parameter Forwarding:** I captured the raw request bodies asynchronously and preserved exact query strings (`request.url.query`), ensuring that complex search queries and form submissions reach the backend unaltered.
+* **High-Performance Stream Forwarding:** Using Python's `httpx` async client combined with Starlette's `StreamingResponse` and `aiter_raw()`, I ensured that responses from the Node.js backend are streamed back to the client efficiently with minimal overhead and no data corruption.
+
+## Sources 
+* **FastAPI & Starlette Documentation:** Consulted for request routing techniques, path converters (`{path:path}`), dependency patterns, and streaming response handling.
+* **Python `httpx` Documentation:** Referenced for building async HTTP client requests, handling client connection pooling, and forwarding raw content.
+* **Docker Guide:** secure port mapping configurations.
