@@ -72,6 +72,91 @@
             "type": "comment",
             "value": "/*",
             "score": 3
-        }
-    ]
+        },
+        {
+            "name": "SQL_CASE_WHEN",
+            "type": "regex",
+            "value": "\\bcase\\s+when\\b",
+            "score": 5
+        },
+        {
+            "name": "SQL_JSON_CHAR",
+            "type": "regex",
+            "value": "\\bjson\\s*\\(\\s*char\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_CASE_THEN_ELSE",
+            "type": "regex",
+            "value": "\\bcase\\s+when\\b.+?\\bthen\\b.+?\\belse\\b",
+            "score": 5
+        },
+        {
+            "name": "SQL_MAKE_SET",
+            "type": "regex",
+            "value": "\\bmake_set\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_TIME_DELAY",
+            "type": "regex",
+            "value": "\\bselect\\s+(?:sleep|pg_sleep)\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_WAITFOR_DELAY",
+            "type": "regex",
+            "value": "\\bwaitfor\\s+delay\\b",
+            "score": 5
+        },
+        {
+            "name": "SQL_SLEEP_CONDITION",
+            "type": "regex",
+            "value": "\\b(?:and|or|rlike)\\s+sleep\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_ELT_SLEEP",
+            "type": "regex",
+            "value": "\\belt\\s*\\([^\\r\\n]{0,150}\\bsleep\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_STACKED_STATEMENT",
+            "type": "regex",
+            "value": ";\\s*(?:select|declare|set|waitfor)\\b",
+            "score": 5
+        },
+        {
+            "name": "SQL_DBMS_LOCK_SLEEP",
+            "type": "regex",
+            "value": "\\bdbms_lock\\s*\\.\\s*sleep\\s*\\(",
+            "score": 5
+        },
+        {
+            "name": "SQL_ORDER_BY_COMMENT",
+            "type": "regex",
+            "value": "\\border\\s+by\\s+\\d+\\s*--",
+            "score": 5
+            },
+        {
+            "name": "SQL_HAVING_BOOLEAN",
+            "type": "regex",
+            "value": "\\bhaving\\s+\\(?\\s*\\d+\\s*(?:=|!=|<>|<=|>=|<|>)\\s*\\d+",
+            "score": 5
+            },
+        {
+            "name": "SQL_IF_SELECT_ELSE",
+            "type": "regex",
+            "value": ";\\s*if\\s*\\([^)]*\\)\\s*select\\b",
+            "score": 5
+            },
+        {
+            "name": "SQL_EXTRACTVALUE",
+            "type": "regex",
+            "value": "\\bextractvalue\\s*\\(",
+            "score": 5
+            }
+        
+        ]  
 }
