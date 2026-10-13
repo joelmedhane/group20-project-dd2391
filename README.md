@@ -213,6 +213,7 @@ As part of our collaborative group project implementing a secure "defense-in-dep
 * **FastAPI & Starlette Documentation:** Consulted for request routing techniques, path converters (`{path:path}`), dependency patterns, and streaming response handling.
 * **Python `httpx` Documentation:** Referenced for building async HTTP client requests, handling client connection pooling, and forwarding raw content.
 * **Docker Guide:** secure port mapping configurations.
+**Morzeux, HttpParamsDataset** I added 92 test queries to the existing 8 in the json file test_queries.json too, here is the main source for them: https://github.com/Morzeux/HttpParamsDataset/. 
 
 ## Filter logic 
 **Author:** Sonja Shkembi
