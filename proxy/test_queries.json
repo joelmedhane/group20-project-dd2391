@@ -46,5 +46,557 @@
     "malicious": true,
     "body": "username=%27+OR+%271%27%3D%271%27+--",
     "query": ""
+  },
+  {
+    "name": "benign dataset value 01 (CSV line 13, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=fennell"
+  },
+  {
+    "name": "SQLi dataset payload 01 (CSV line 11215, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%27%29%29+or+8514%3Dbenchmark%285000000%2Cmd5%280x544d5a4c%29%29%23"
+  },
+  {
+    "name": "benign dataset value 02 (CSV line 14, POST body)",
+    "malicious": false,
+    "body": "q=d50allecido",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 02 (CSV line 11216, POST body)",
+    "malicious": true,
+    "body": "q=-9405%27+union+all+select+2539--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 03 (CSV line 16, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=genny"
+  },
+  {
+    "name": "SQLi dataset payload 03 (CSV line 11217, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%25%22%3Bselect+sleep%285%29%23"
+  },
+  {
+    "name": "benign dataset value 04 (CSV line 24, POST body)",
+    "malicious": false,
+    "body": "q=maala8",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 04 (CSV line 11220, POST body)",
+    "malicious": true,
+    "body": "q=-1988+where+4597%3D4597+union+all+select+4597%2C4597%2C4597%2C4597%2C4597%2C4597--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 05 (CSV line 25, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=cascabela"
+  },
+  {
+    "name": "SQLi dataset payload 05 (CSV line 10827, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%27+where+1844%3D1844%3Bselect+%28case+when+%286276%3D6276%29+then+6276+else+6276%2A%28select+6276+from+information_schema.character_sets%29+end%29%23"
+  },
+  {
+    "name": "benign dataset value 06 (CSV line 26, POST body)",
+    "malicious": false,
+    "body": "q=ludolfo",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 06 (CSV line 10829, POST body)",
+    "malicious": true,
+    "body": "username=1%29+or+2367%3D%28select+count%28%2A%29+from+rdb%24fields+as+t1%2Crdb%24types+as+t2%2Crdb%24collations+as+t3%2Crdb%24functions+as+t4%29--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 07 (CSV line 33, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=empeltre"
+  },
+  {
+    "name": "SQLi dataset payload 07 (CSV line 10830, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%29+union+all+select+null%2Cnull%23"
+  },
+  {
+    "name": "benign dataset value 08 (CSV line 35, POST body)",
+    "malicious": false,
+    "body": "q=mckenney",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 08 (CSV line 10835, POST body)",
+    "malicious": true,
+    "body": "q=1%29%3Bselect+pg_sleep%285%29+and+%281044%3D1044",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 09 (CSV line 36, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=estantalar"
+  },
+  {
+    "name": "SQLi dataset payload 09 (CSV line 13501, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=-6855%27%29+or+8519%3D9248"
+  },
+  {
+    "name": "benign dataset value 10 (CSV line 37, POST body)",
+    "malicious": false,
+    "body": "q=poma+gozalbo",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 10 (CSV line 13502, POST body)",
+    "malicious": true,
+    "body": "q=-8004%25%27%29+or+%282301%3D7504%29%2A7504+and+%28%27%25%27%3D%27",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 11 (CSV line 44, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=kindra"
+  },
+  {
+    "name": "SQLi dataset payload 11 (CSV line 13503, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%29%29+union+all+select+null%23"
+  },
+  {
+    "name": "benign dataset value 12 (CSV line 45, POST body)",
+    "malicious": false,
+    "body": "q=h9655",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 12 (CSV line 14028, POST body)",
+    "malicious": true,
+    "body": "username=1%27%7C%7C%28select+%27cclo%27+from+dual+where+6823%3D6823+and+9198%3D9198--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 13 (CSV line 46, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=josias"
+  },
+  {
+    "name": "SQLi dataset payload 13 (CSV line 14029, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=-8136%27%29+union+all+select+1324%2C1324%2C1324%2C1324%23"
+  },
+  {
+    "name": "benign dataset value 14 (CSV line 47, POST body)",
+    "malicious": false,
+    "body": "q=fonoll+zurko",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 14 (CSV line 14030, POST body)",
+    "malicious": true,
+    "body": "q=-3988%27%29%29+union+all+select+1113%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 15 (CSV line 54, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=kong-que"
+  },
+  {
+    "name": "SQLi dataset payload 15 (CSV line 14031, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%27+and+3824%3Dbenchmark%285000000%2Cmd5%280x76555642%29%29+and+%27hmqq%27%3D%27hmqq"
+  },
+  {
+    "name": "benign dataset value 16 (CSV line 55, POST body)",
+    "malicious": false,
+    "body": "q=5x8r0r",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 16 (CSV line 14032, POST body)",
+    "malicious": true,
+    "body": "q=1%25%27%29+and+4061%3D2730%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 17 (CSV line 57, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=goggin"
+  },
+  {
+    "name": "SQLi dataset payload 17 (CSV line 14033, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%27+in+boolean+mode%29%3Bselect+count%28%2A%29+from+all_users+t1%2Call_users+t2%2Call_users+t3%2Call_users+t4%2Call_users+t5--"
+  },
+  {
+    "name": "benign dataset value 18 (CSV line 58, POST body)",
+    "malicious": false,
+    "body": "q=indocto",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 18 (CSV line 14516, POST body)",
+    "malicious": true,
+    "body": "username=1%27%29%29+as+vuzt+where+4971%3D4971%3Bselect+count%28%2A%29+from+rdb%24fields+as+t1%2Crdb%24types+as+t2%2Crdb%24collations+as+t3%2Crdb%24functions+as+t4--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 19 (CSV line 59, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=serneo"
+  },
+  {
+    "name": "SQLi dataset payload 19 (CSV line 14517, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=-9676+or+elt%281032%3D1032%2C3623%29%23+jcaq"
+  },
+  {
+    "name": "benign dataset value 20 (CSV line 66, POST body)",
+    "malicious": false,
+    "body": "q=xiangsen",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 20 (CSV line 14518, POST body)",
+    "malicious": true,
+    "body": "q=-7565%27%29%29+union+all+select+7745%2C7745%2C7745%2C7745%2C7745%2C7745%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 21 (CSV line 67, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=correccionalmente"
+  },
+  {
+    "name": "SQLi dataset payload 21 (CSV line 14521, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%25%27%29%29%29+union+all+select+null%23"
+  },
+  {
+    "name": "benign dataset value 22 (CSV line 68, POST body)",
+    "malicious": false,
+    "body": "q=cleofs",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 22 (CSV line 14522, POST body)",
+    "malicious": true,
+    "body": "q=1%29%29%29+rlike+sleep%285%29%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 23 (CSV line 73, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=vasilopo"
+  },
+  {
+    "name": "SQLi dataset payload 23 (CSV line 14523, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%29%29+union+all+select+null--"
+  },
+  {
+    "name": "benign dataset value 24 (CSV line 74, POST body)",
+    "malicious": false,
+    "body": "q=ladronzue_lo",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 24 (CSV line 14524, POST body)",
+    "malicious": true,
+    "body": "username=-8794%29%29%29+union+all+select+5802%2C5802%2C5802--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 25 (CSV line 76, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=elbeze"
+  },
+  {
+    "name": "SQLi dataset payload 25 (CSV line 14526, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%27%29%29%3Bbegin+user_lock.sleep%285%29%3B+end+and+%28%28%27pfrt%27%3D%27pfrt"
+  },
+  {
+    "name": "benign dataset value 26 (CSV line 77, POST body)",
+    "malicious": false,
+    "body": "q=cachapera",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 26 (CSV line 15163, POST body)",
+    "malicious": true,
+    "body": "q=1%25%27%29%29%29+rlike+sleep%285%29+and+%28%28%28%27%25%27%3D%27",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 27 (CSV line 78, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=molledo+basagaa"
+  },
+  {
+    "name": "SQLi dataset payload 27 (CSV line 15165, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%27%29+or+extractvalue%281297%2Cconcat%280x5c%2C0x7171706a71%2C%28select+%28elt%281297%3D1297%2C1%29%29%29%2C0x717a767a71%29%29+and+%28%27tetk%27%3D%27tetk"
+  },
+  {
+    "name": "benign dataset value 28 (CSV line 82, POST body)",
+    "malicious": false,
+    "body": "q=zarratn",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 28 (CSV line 15166, POST body)",
+    "malicious": true,
+    "body": "q=-7381%27%29%29+or+elt%285882%3D5919%2C5919%29+and+%28%28%27nzri%27%3D%27nzri",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 29 (CSV line 84, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=lauriaul"
+  },
+  {
+    "name": "SQLi dataset payload 29 (CSV line 15167, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%27%29%3Bselect+benchmark%285000000%2Cmd5%280x4c4d6142%29%29"
+  },
+  {
+    "name": "benign dataset value 30 (CSV line 85, POST body)",
+    "malicious": false,
+    "body": "q=er3t3e1",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 30 (CSV line 15168, POST body)",
+    "malicious": true,
+    "body": "username=-1587%27%29+or+8339%3D5540",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 31 (CSV line 86, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=atanaspulos"
+  },
+  {
+    "name": "SQLi dataset payload 31 (CSV line 15175, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=-4761+order+by+1--"
+  },
+  {
+    "name": "benign dataset value 32 (CSV line 93, POST body)",
+    "malicious": false,
+    "body": "q=robieux",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 32 (CSV line 15176, POST body)",
+    "malicious": true,
+    "body": "q=1%25%27+or+8156%3D%28select+count%28%2A%29+from+generate_series%281%2C5000000%29%29--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 33 (CSV line 94, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=cuatriduana"
+  },
+  {
+    "name": "SQLi dataset payload 33 (CSV line 15177, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%27%29%29%29%3Bbegin+dbms_lock.sleep%285%29%3B+end+and+%28%28%28%27xzbk%27%3D%27xzbk"
+  },
+  {
+    "name": "benign dataset value 34 (CSV line 96, POST body)",
+    "malicious": false,
+    "body": "q=darby",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 34 (CSV line 15178, POST body)",
+    "malicious": true,
+    "body": "q=1%27%7C%7C%28select+%27xemx%27+from+dual+where+4683%3D4683+or+sleep%285%29%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 35 (CSV line 97, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=ti7o"
+  },
+  {
+    "name": "SQLi dataset payload 35 (CSV line 28407, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%29%29+as+msug+where+3503%3D3503+and+sleep%285%29%23"
+  },
+  {
+    "name": "benign dataset value 36 (CSV line 98, POST body)",
+    "malicious": false,
+    "body": "q=folch+pintado",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 36 (CSV line 28409, POST body)",
+    "malicious": true,
+    "body": "username=1%29+or+6793%3D%28select+6793+from+pg_sleep%285%29%29+and+%287015%3D7015",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 37 (CSV line 103, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=esther"
+  },
+  {
+    "name": "SQLi dataset payload 37 (CSV line 28416, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=-1772%27+or+7911%3D4985%23"
+  },
+  {
+    "name": "benign dataset value 38 (CSV line 104, POST body)",
+    "malicious": false,
+    "body": "q=labranto",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 38 (CSV line 28417, POST body)",
+    "malicious": true,
+    "body": "q=-8264%25%27%29+order+by+1%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 39 (CSV line 105, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=julisa"
+  },
+  {
+    "name": "SQLi dataset payload 39 (CSV line 28418, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=-4896%27%29+union+all+select+1929--"
+  },
+  {
+    "name": "benign dataset value 40 (CSV line 106, POST body)",
+    "malicious": false,
+    "body": "q=pelez+bastus",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 40 (CSV line 28419, POST body)",
+    "malicious": true,
+    "body": "q=-7293%27%29%29%29+or+3038%3D3038",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 41 (CSV line 112, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=fitzgera"
+  },
+  {
+    "name": "SQLi dataset payload 41 (CSV line 28422, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=1%29%29+or+6793%3D%28select+6793+from+pg_sleep%285%29%29+and+%28%283069%3D3069"
+  },
+  {
+    "name": "benign dataset value 42 (CSV line 115, POST body)",
+    "malicious": false,
+    "body": "q=kinnie",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 42 (CSV line 15203, POST body)",
+    "malicious": true,
+    "body": "username=-1886%27+where+5518%3D5518+or+4493%3Dutl_inaddr.get_host_address%28chr%28113%29%7C%7Cchr%28113%29%7C%7Cchr%28112%29%7C%7Cchr%28106%29%7C%7Cchr%28113%29%7C%7C%28select+%28case+when+%284493%3D4493%29+then+1+else+0+end%29+from+dual%29%7C%7Cchr%28113%29%7C%7Cchr%28122%29%7C%7Cchr%28118%29%7C%7Cchr%28122%29%7C%7Cchr%28113%29%29--",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 43 (CSV line 116, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=ret4ne3or"
+  },
+  {
+    "name": "SQLi dataset payload 43 (CSV line 28424, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "q=-3445+union+all+select+5505%2C5505%2C5505--"
+  },
+  {
+    "name": "benign dataset value 44 (CSV line 117, POST body)",
+    "malicious": false,
+    "body": "q=graziana",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 44 (CSV line 28425, POST body)",
+    "malicious": true,
+    "body": "q=1%29+as+uhmm+where+2304%3D2304+union+all+select+null%23",
+    "query": ""
+  },
+  {
+    "name": "benign dataset value 45 (CSV line 122, GET query)",
+    "malicious": false,
+    "body": "",
+    "query": "q=valina"
+  },
+  {
+    "name": "SQLi dataset payload 45 (CSV line 28426, GET query)",
+    "malicious": true,
+    "body": "",
+    "query": "username=1%27%2B%28select+%27wyxu%27+where+2555%3D2555+union+all+select+null%23"
+  },
+  {
+    "name": "benign dataset value 46 (CSV line 123, POST body)",
+    "malicious": false,
+    "body": "q=07u8e37ia",
+    "query": ""
+  },
+  {
+    "name": "SQLi dataset payload 46 (CSV line 28427, POST body)",
+    "malicious": true,
+    "body": "q=-2167%27%29%29%29+union+all+select+3804%2C3804%2C3804%2C3804%2C3804%2C3804%23",
+    "query": ""
   }
 ]
