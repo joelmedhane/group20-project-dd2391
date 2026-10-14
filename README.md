@@ -261,4 +261,21 @@ These findings conclude that unfortunately a signature-based WAF alone is not en
 - [Anomaly Scoring](https://coreruleset.org/docs/2-how-crs-works/2-1-anomaly_scoring/)
 - [Python re documentation](https://docs.python.org/3/library/re.html)
 
+## WAF testing and evaluation
+**Author:** Alexander Pereira Engström
+
+### Responsibility
+My contribution was to build a repeatable way to test the WAF and evaluate how changing its blocking threshold affects detection. I created the initial eight labeled queries, added an automated behavior test, and wrote a report script to compare threshold settings.
+
+### Test Queries and Evaluation
+* **Labeled test cases:** I created the original eight benign and malicious examples in `proxy/test_queries.json`. Alberto later added 92 cases from the Morzeux HttpParamsDataset, bringing the corpus to 100 cases: 50 labeled benign and 50 labeled as SQL injection.
+* **Automated behavior test:** `proxy/test_waf.py` runs each labeled request through the WAF and compares its decision with the expected label.
+* **Threshold report:** `proxy/evaluate_waf.py` compares thresholds 2, 5, and 6. It reports true positives, false positives, true negatives, false negatives, precision, recall, and the result for each query.
+* **Current findings:** At thresholds 2 and 5, the WAF blocks 45 of the 50 malicious-labeled requests and allows all 50 benign requests. This means five malicious-labeled cases are missed. At threshold 6, 32 malicious cases are blocked and 18 are missed, with no benign cases blocked. These results describe this corpus only and are not a guarantee of real-world performance.
+* **Configuration:** I aligned the threshold key in `proxy/waf_rules.json` with the key read by the filter, so the configured threshold is applied.
+
+### Sources
+* **Python `unittest` documentation:** https://docs.python.org/3/library/unittest.html
+* **OWASP Web Security Testing Guide, Testing for SQL Injection:** https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection/ (guidance on testing web applications for SQL injection)
+* **Morzeux, HttpParamsDataset:** https://github.com/Morzeux/HttpParamsDataset/ (source for the 92 additional cases added by Alberto)
 
