@@ -151,7 +151,7 @@ The node_target service runs the vulnerable Express application inside Docker.
 
 During the baseline demonstration, port 3000 is exposed to the host so the SQL injection vulnerability can be tested directly.
 
-In the final setup, the Node target will only be accessible internally through Docker, while the FastAPI proxy/WAF will be exposed on port 80.
+In the final setup, the Node target will only be accessible internally through Docker, while the FastAPI proxy/WAF will be exposed on port 8080.
 
 The WAF is an additional defense layer and is not a replacement for secure SQL queries such as parameterized queries.
 
