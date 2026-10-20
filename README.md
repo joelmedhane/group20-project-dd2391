@@ -4,7 +4,7 @@ A deliberately insecure local Node.js/Express/SQLite application for coursework 
 
 ## Important
 
-This application is **intentionally vulnerable**. It binds only to `127.0.0.1` by default. Do not expose it to the Internet or use it with real credentials/data.
+This application is **intentionally vulnerable**.
 
 ## Features
 
@@ -20,37 +20,6 @@ This application is **intentionally vulnerable**. It binds only to `127.0.0.1` b
   - user search
 
 The project uses the `sqlite3` npm package, **not** `better-sqlite3`.
-
-## Run
-
-```bash
-npm install
-npm start
-```
-
-Then open:
-
-```text
-http://127.0.0.1:3000
-```
-
-The database file is created automatically on first run.
-
-## Reset database
-
-Stop the server and delete:
-
-```bash
-rm app.db
-```
-
-Then run `npm start` again.
-
-## Demo accounts
-
-- `alice` / `alice123`
-- `bob` / `bob123`
-- `charlie` / `charlie123`
 
 ## Where the deliberate vulnerabilities are
 
@@ -109,90 +78,93 @@ charlie123
 This demonstrates how SQL injection can expose sensitive database information when user input is inserted directly into SQL queries.
 
 
-# Docker setup
-
-The vulnerable Express.js/SQLite application has been containerized with Docker.
-
-The application is intentionally vulnerable to SQL injection for educational testing. The Node.js target currently runs on port 3000.
-
-Run the application with the following commands:
-
-Build the Docker image:
-
-```
-docker compose build
-```
-
-Start the application:
-
-```
-docker compose up
-```
-
-Or build and start in one command:
-
-```
-docker compose up --build
-```
-
-Then open:
-
-http://localhost:3000
-
-Stop the application with:
-
-```
-docker compose down
-```
-
-Current Docker structure
-
-The node_target service runs the vulnerable Express application inside Docker.
-
-During the baseline demonstration, port 3000 is exposed to the host so the SQL injection vulnerability can be tested directly.
-
-In the final setup, the Node target will only be accessible internally through Docker, while the FastAPI proxy/WAF will be exposed on port 8080.
-
 The WAF is an additional defense layer and is not a replacement for secure SQL queries such as parameterized queries.
 
-# Running SQLmap Tests
 
-## 1. Run the test
+## Running the Project
 
-From the project root, navigate to the SQLmap directory:
+### Requirements
+Before running the project, make sure the following are installed:
+- Docker and Docker Compose
+- Git
+- Bash and curl (for automated SQLmap testing)
+- Python 3 (for running the WAF evaluation scripts)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/joelmedhane/group20-project-dd2391.git
+cd group20-project-dd2391
+```
+
+### 2. Build and Start the Application
+
+Run the following command from the project root:
+
+```bash
+docker compose up -d --build node_target fastapi_proxy
+```
+
+This builds and starts two services:
+- `node_target`: The intentionally vulnerable Node.js/Express application running internally on port 3000.
+- `fastapi_proxy`: The FastAPI reverse proxy and WAF, exposed on localhost port 8080.
+
+Open the application in your browser:
+
+http://localhost:8080
+
+All incoming requests pass through the WAF before reaching the vulnerable backend.
+
+### 3. Test the Application
+
+Demo accounts:
+
+- `alice` / `alice123`
+- `bob` / `bob123`
+- `charlie` / `charlie123`
+
+You can use the application to test normal functionality such as logging in, searching for users, and adding friends.
+
+The WAF inspects incoming requests and returns HTTP 403 Forbidden when the request reaches its configured blocking threshold.
+
+### 4. Run Automated SQLmap Tests
+
+From the project root:
 
 ```bash
 cd sql-map
+bash run_sqlmap.sh
 ```
 
-Run the test script:
+The script starts the required containers and executes SQLmap against the login and authenticated user search endpoints through the WAF.
+
+Test results are stored in:
+
+- `sql-map/sqlmap-results/waf.log`
+- `sql-map/sqlmap-results/waf-search.log`
+
+The script prints a summary of HTTP response codes to the terminal.
+
+### 5. Run WAF Evaluation Tests
+
+From the repository root:
 
 ```bash
-./run_sqlmap.sh
+python3 proxy/test_waf.py
+python3 proxy/evaluate_waf.py
 ```
 
-The script starts the vulnerable application and WAF in the foreground, builds and runs the SQLmap container, and prints a summary of the HTTP status codes observed during testing.
+These tests evaluate the WAF against labeled benign and malicious requests and compare different blocking thresholds.
 
-## 2. View the results
+### 6. Stop the Application
 
-The results are saved in:
+From the repository root:
 
-```text
-sql-map/sqlmap-results/
+```bash
+docker compose down
 ```
 
-The traffic log is available at:
-
-```text
-sql-map/sqlmap-results/waf.log
-```
-
-The script prints counts for:
-
-- **403** — Forbidden.
-- **401** — Unauthorized.
-- **400** — Bad Request.
-- **200** — OK.
+The backend is intentionally vulnerable and should only be used in a controlled testing environment.
 
 
 ## Individual Contributions:
