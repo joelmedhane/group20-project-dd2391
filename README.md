@@ -258,7 +258,23 @@ My contribution was to build a repeatable way to test the WAF and evaluate how c
 My main contribution was setting up the initial vulnerable web application and Docker environment, manually verifying SQL injection vulnerabilities, and developing an automated testing process using SQLmap. My focus was establishing a working environment for demonstrating SQL injection attacks and evaluating the effectiveness of our WAF.
 
 ### Initial Web Application
-* **Web Application:** I used generative AI to create the initial web application, providing a user interface for registration, login, user search, and friend management. This served as the starting point for our SQL injection testing environment.
+* **Web Application:** I used generative AI to create the initial web application, providing a user interface for registration, login, user search, and friend management. This served as the starting point for our SQL injection testing environment. **Prompt used:**
+
+> Hi, can you build me the most basic webpage with node.js. It is intented for a project where we do a firewall to filter out sqli, but you will not to the firewall only the basic webpage for that. it does not need to be flashy or anything just basic funcitonality such as log in, create account and add friends. You should be able to view your friends and search for other users, No need for elaborate style.cc. it should be javascript, http. and the database local as sqlLite. Should be ueasy to run from temrinal with npm. It should be prone and vulnarable to sqli, in create account, log in and search users. make it downlable for me. dont use better sqlite3
+
+**Files created:**
+The following application structure was generated:
+
+```text
+vulnerable-sqli-demo/
+├── server.js
+├── app.db
+├── package-lock.jsom
+├── package.json
+└── public/
+    ├── index.html
+    └── app.js
+```
 
 ### Initial Docker Setup
 * **Containerization:** I created the initial `Dockerfile` and `docker-compose.yml` configuration to run the vulnerable application inside a Docker container, providing a reproducible environment for local testing.
