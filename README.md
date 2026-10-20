@@ -279,3 +279,27 @@ My contribution was to build a repeatable way to test the WAF and evaluate how c
 * **OWASP Web Security Testing Guide, Testing for SQL Injection:** https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection/ (guidance on testing web applications for SQL injection)
 * **Morzeux, HttpParamsDataset:** https://github.com/Morzeux/HttpParamsDataset/ (source for the 92 additional cases added by Alberto)
 
+## Initial Web Application, Docker Setup and SQLmap Testing
+**Author:** Joel Medhane
+
+## Responsibility
+My main contribution was setting up the initial vulnerable web application and Docker environment, manually verifying SQL injection vulnerabilities, and developing an automated testing process using SQLmap. My focus was establishing a working environment for demonstrating SQL injection attacks and evaluating the effectiveness of our WAF.
+
+### Initial Web Application
+* **Web Application:** I used generative AI to create the initial web application, providing a user interface for registration, login, user search, and friend management. This served as the starting point for our SQL injection testing environment.
+
+### Initial Docker Setup
+* **Containerization:** I created the initial `Dockerfile` and `docker-compose.yml` configuration to run the vulnerable application inside a Docker container, providing a reproducible environment for local testing.
+* **Baseline Testing Environment:** I initially configured Docker Compose to expose the vulnerable application directly to the host, allowing us to interact with the backend without an intermediary security layer. When the reverse proxy was later introduced, the direct port mapping was removed to prevent requests from bypassing the WAF.
+* **Manual SQL Injection Verification:** After setting up Docker, we verified the vulnerabilities through the webpage. Using `' OR '1'='1' --`, we demonstrated authentication bypass by modifying the SQL `WHERE` condition and commenting out the password check. We also used `' UNION SELECT id, password FROM users --` to extract stored passwords through the user search functionality. These tests established a baseline for evaluating the WAF.
+
+### Automated SQLmap Testing
+* **SQLmap Automation:** I developed the Bash script `run_sqlmap.sh` to automate SQL injection testing against the WAF. The script uses `--batch` for non-interactive execution, `--level 3` for more extensive testing, and `--flush-session` to avoid reusing results from previous scans.
+* **Login Endpoint Testing:** I configured SQLmap to test `/api/login` using JSON-formatted POST requests. The `--data` argument specifies the request body, while `-p username,password` explicitly selects both parameters for injection testing. The `--ignore-code 401` option handles expected authentication failures during the tests.
+* **Authenticated Search Testing:** Since `/api/users/search` requires authentication, I implemented a login step using `curl` to obtain the `connect.sid` session cookie. The cookie is extracted from the saved cookie file and passed to SQLmap using `--cookie`, allowing it to test the search parameter `q` within an authenticated session.
+* **Docker Integration:** The script starts the backend and FastAPI proxy using `docker compose up -d --build`, then executes SQLmap in a separate container using `docker compose run --build --rm sqlmap`. Requests are directed to `http://fastapi_proxy:8000` over the Docker network, ensuring that the attacks pass through the WAF instead of reaching the vulnerable backend directly.
+* **Traffic Logging and Analysis:** I used SQLmap's `-t` option to capture HTTP request and response traffic in `waf.log` and `waf-search.log`. The script uses `grep` to summarize HTTP response codes: `403` (Forbidden), `401` (Unauthorized), `400` (Bad Request), and `200` (OK). This provided a repeatable method for observing the WAF's behavior against automated injection attempts. However, an HTTP 200 response does not necessarily indicate successful SQL injection, since requests may reach the backend without successfully exploiting the vulnerability.
+
+### Sources
+* **SQLmap Documentation:** https://github.com/sqlmapproject/sqlmap/wiki/Usage (SQL injection testing, command-line parameters, authentication handling, and HTTP traffic logging)
+* **Docker Documentation:** https://docs.docker.com/ (Dockerfile configuration, Docker Compose, container networking, and port mapping)
