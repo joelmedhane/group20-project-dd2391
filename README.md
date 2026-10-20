@@ -87,7 +87,6 @@ The WAF is an additional defense layer and is not a replacement for secure SQL q
 Before running the project, make sure the following are installed:
 - Docker and Docker Compose
 - Git
-- Bash and curl (for automated SQLmap testing)
 - Python 3 (for running the WAF evaluation scripts)
 
 ### 1. Clone the Repository
