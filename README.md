@@ -2,8 +2,10 @@
 
 A deliberately insecure local Node.js/Express/SQLite application for coursework involving SQL-injection filtering/firewall/WAF experiments.
 
-## Important
+## Problem Statement
+The goal of this project is to investigate how effectively a rule-based Web Application Firewall (WAF) can detect and prevent SQL injection attacks. We implement a WAF using a FastAPI reverse proxy to protect an intentionally vulnerable web application and evaluate its effectiveness using automated SQLmap testing and labeled test cases. We also examine the tradeoff between false positives and false negatives.
 
+## Important
 This application is **intentionally vulnerable**.
 
 ## Features
@@ -165,7 +167,6 @@ docker compose down
 
 The backend is intentionally vulnerable and should only be used in a controlled testing environment.
 
-
 ## Individual Contributions:
 
 **Author:** Alberto Calcara 
@@ -269,7 +270,9 @@ My main contribution was setting up the initial vulnerable web application and D
 * **Login Endpoint Testing:** I configured SQLmap to test `/api/login` using JSON-formatted POST requests. The `--data` argument specifies the request body, while `-p username,password` explicitly selects both parameters for injection testing. The `--ignore-code 401` option handles expected authentication failures during the tests.
 * **Authenticated Search Testing:** Since `/api/users/search` requires authentication, I implemented a login step using `curl` to obtain the `connect.sid` session cookie. The cookie is extracted from the saved cookie file and passed to SQLmap using `--cookie`, allowing it to test the search parameter `q` within an authenticated session.
 * **Docker Integration:** The script starts the backend and FastAPI proxy using `docker compose up -d --build`, then executes SQLmap in a separate container using `docker compose run --build --rm sqlmap`. Requests are directed to `http://fastapi_proxy:8000` over the Docker network, ensuring that the attacks pass through the WAF instead of reaching the vulnerable backend directly.
-* **Traffic Logging and Analysis:** I used SQLmap's `-t` option to capture HTTP request and response traffic in `waf.log` and `waf-search.log`. The script uses `grep` to summarize HTTP response codes: `403` (Forbidden), `401` (Unauthorized), `400` (Bad Request), and `200` (OK). This provided a repeatable method for observing the WAF's behavior against automated injection attempts. However, an HTTP 200 response does not necessarily indicate successful SQL injection, since requests may reach the backend without successfully exploiting the vulnerability.
+* **Traffic Logging and Analysis:** I used SQLmap's `-t` option to capture HTTP request and response traffic in `waf.log` and `waf-search.log`. The script uses `grep` to summarize HTTP response codes: `403` (Forbidden), `401` (Unauthorized), `400` (Bad Request), and `200` (OK). This provided a repeatable method for observing the WAF's behavior against automated injection attempts. 
+* **SQLmap Findings:** During login testing, the WAF blocked 2,423 requests (403), while 152 returned Unauthorized (401) and 76 returned Bad Request (400), with no HTTP 200 responses. During authenticated search testing, the WAF blocked 1,214 requests (403), while 38 returned Bad Request (400) and 51 returned OK (200). SQLmap did not identify any exploitable SQL injection vulnerabilities through the WAF during either test. However, the 51 successful HTTP responses indicate that some requests reached the backend, although this does not necessarily mean that SQL injection was successful.
+
 
 ### Sources
 * **SQLmap Documentation:** https://github.com/sqlmapproject/sqlmap/wiki/Usage (SQL injection testing, command-line parameters, authentication handling, and HTTP traffic logging)
